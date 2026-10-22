@@ -1,0 +1,17 @@
+# Environment variables and secrets
+.env
+.env.*
+
+# Virtual environments
+.venv/
+backend/.venv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Temporary editor files
+tempCodeRunnerFile.py
+
+# Local databases
+*.db
