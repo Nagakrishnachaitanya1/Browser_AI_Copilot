@@ -11,7 +11,6 @@ router = APIRouter()
 initialize_db()
 
 
-
 @router.post("/chat")
 def chat(body: ChatRequest):
 
@@ -46,4 +45,19 @@ def get(id: int):
 
 @router.get("/chats")
 def get_all():
-    return retriveAll()
+
+    records = retriveAll()
+
+    records_dics = []
+
+    for record in records:
+        record_dics = {
+            "id": record[0],
+            "question": record[1],
+            "page_content": record[2],
+            "answer": record[3],
+        }
+
+        records_dics.append(record_dics)
+
+    return records_dics
