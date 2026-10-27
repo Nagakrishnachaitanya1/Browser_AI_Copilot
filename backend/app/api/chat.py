@@ -1,3 +1,5 @@
+import sqlite3
+
 from fastapi import APIRouter, HTTPException, status
 
 from app.services.llm import generate_response
@@ -14,9 +16,24 @@ initialize_db()
 @router.post("/chat")
 def chat(body: ChatRequest):
 
-    answer = generate_response(page_content=body.page_content, question=body.question)
+    try:
+        answer = generate_response(
+            page_content=body.page_content, question=body.question
+        )
+    except RuntimeError:
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail="The AI service is temporarily unavailable",
+        )
 
-    id = save(**body.model_dump(), answer=answer)
+    try:
+        id = save(**body.model_dump(), answer=answer)
+
+    except sqlite3.Error:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to save the conversation.",
+        )
 
     return {
         "id": id,
