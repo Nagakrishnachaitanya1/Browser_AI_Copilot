@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browser AI Copilot</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-icon">B</div>
+          <div class="brand-name">Copilot</div>
+        </div>
+
+        <div class="model-name">Web Assistant <span>⌄</span></div>
+
+        <button id="extract-page" class="sync-button" type="button">
+          Read page
+        </button>
+      </header>
+
+      <div class="page-bar">
+        <span id="page-dot" class="page-dot"></span>
+        <span id="page-status" role="status">
+          Read the active webpage to get started.
+        </span>
+      </div>
+
+      <section id="conversation" class="conversation">
+        <div id="welcome-message" class="welcome-message">
+          <h1>What are we looking at?</h1>
+          <p>
+            Ask questions about the current webpage, summarize important points,
+            or explore a topic.
+          </p>
+        </div>
+
+        <section id="user-turn" class="message user-message" hidden>
+          <div class="message-meta">
+            <span>You</span>
+            <span>Just now</span>
+          </div>
+          <div id="last-question" class="user-bubble"></div>
+        </section>
+
+        <section class="message assistant-message">
+          <div class="message-meta">
+            <span class="assistant-name">
+              <span class="assistant-dot"></span>
+              Copilot
+            </span>
+            <span id="answer-meta">Grounded in page</span>
+          </div>
+
+          <div id="answer" class="answer-text" aria-live="polite">
+            Your answer will appear here after you ask a question.
+          </div>
+        </section>
+
+        <p id="error-message" class="error-message" role="alert" hidden></p>
+      </section>
+
+      <div class="bottom-panel">
+        <div class="suggestions">
+          <button type="button" data-prompt="Summarize the key takeaways">
+            Summarize key takeaways
+          </button>
+          <button
+            type="button"
+            data-prompt="Find the main arguments and evidence">
+            Find main arguments
+          </button>
+          <button type="button" data-prompt="Explain this page in simple terms">
+            Explain simply
+          </button>
+        </div>
+
+        <div class="composer">
+          <label for="question" class="sr-only">Ask about this webpage</label>
+
+          <textarea
+            id="question"
+            rows="2"
+            placeholder="Ask about this page, or summarize..."></textarea>
+
+          <div class="composer-footer">
+            <span class="composer-hint">Answers use webpage content</span>
+            <button id="ask-ai" type="button" disabled aria-label="Ask AI">
+              ↑
+            </button>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <span>Grounded in active tab</span>
+          <span>Browser AI Copilot</span>
+        </footer>
+      </div>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

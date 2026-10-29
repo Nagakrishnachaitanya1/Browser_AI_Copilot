@@ -14,7 +14,7 @@ llm = Groq(api_key=api_key)
 
 def generate_response(page_content: str, question: str):
     try:
-        response = llm.chat.completions.create(
+        response = llm.chat.completions.create(                                                              
             model="openai/gpt-oss-120b",
             messages=[
                 {
