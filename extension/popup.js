@@ -7,7 +7,7 @@ const answerElement = document.getElementById("answer");
 
 let pageContent = "";
 
-// Extract text from the active webpage
+
 extractButton.addEventListener("click", async () => {
   errorMessage.hidden = true;
   askButton.disabled = true;
@@ -44,7 +44,7 @@ extractButton.addEventListener("click", async () => {
       ? `Page content extracted (${maxCharacters.toLocaleString()} characters; truncated).`
       : `Page content extracted (${pageContent.length.toLocaleString()} characters).`;
 
-    // Enable Ask AI after successful extraction
+  
     askButton.disabled = false;
   } catch (error) {
     pageContent = "";
@@ -58,7 +58,7 @@ extractButton.addEventListener("click", async () => {
   }
 });
 
-// Send the question and page content to FastAPI
+
 askButton.addEventListener("click", async () => {
   const question = questionInput.value.trim();
 
@@ -106,10 +106,9 @@ function updateAskButton() {
   askButton.disabled = !pageContent || !questionInput.value.trim();
 }
 
-// Enable or disable Ask AI when the user types
+
 questionInput.addEventListener("input", updateAskButton);
 
-// Make suggested prompts fill the question input
 document.querySelectorAll("[data-prompt]").forEach((button) => {
   button.addEventListener("click", () => {
     questionInput.value = button.dataset.prompt;
